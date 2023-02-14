@@ -1,0 +1,6 @@
+.idea
+/phpunit.xml
+/vendor
+.phpunit.result.cache
+/src/Resources/DwhQueryBundle
+/.DS_Store

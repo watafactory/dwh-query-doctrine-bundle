@@ -1,0 +1,3 @@
+dwh_query:
+  schema_builder:
+    class: Wata\DwhQueryDoctrineBundle\Schema\DoctrineSchemaBuilder

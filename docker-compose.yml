@@ -1,0 +1,13 @@
+version: "3"
+services:
+  apache-php:
+    build:
+      context: ./.docker/apache-php
+      dockerfile: Dockerfile
+    volumes:
+      - .docker/apache-php/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      - .:/var/www/html
+      - ./vendor:/var/www/html/vendor:cached
+      - /var/www/html/var/cache
+    environment:
+      PHP_IDE_CONFIG: "serverName=localhost"

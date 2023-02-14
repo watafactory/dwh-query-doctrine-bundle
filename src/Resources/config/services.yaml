@@ -1,0 +1,57 @@
+services:
+  _defaults:
+    public: true
+  #TODO Check why the following lines are not working and the services need to be declared one by one (done below)
+  _instanceof:
+    Wata\DwhQueryDoctrineBundle\Definition\Operators\OperatorInterface:
+      tags: [ 'dwh_query_doctrine.operator_type.tag' ]
+
+    Wata\DwhQueryDoctrineBundle\Dql\IDqlAggregateFunction:
+      tags: [ 'dwh_query_doctrine.dql_aggregate_function.tag' ]
+
+  # Operators -->
+  Wata\DwhQueryDoctrineBundle\Definition\Operators\BetweenOperator:
+    tags: [ 'dwh_query_doctrine.operator_type.tag' ]
+
+  Wata\DwhQueryDoctrineBundle\Definition\Operators\EqualOperator:
+    tags: [ 'dwh_query_doctrine.operator_type.tag' ]
+
+  Wata\DwhQueryDoctrineBundle\Definition\Operators\InOperator:
+    tags: [ 'dwh_query_doctrine.operator_type.tag' ]
+
+  Wata\DwhQueryDoctrineBundle\Definition\Operators\NotEqualOperator:
+    tags: [ 'dwh_query_doctrine.operator_type.tag' ]
+  # <--
+
+  # DQL aggregate functions -->
+  Wata\DwhQueryDoctrineBundle\Dql\CountAggregateFunction:
+    tags: [ 'dwh_query_doctrine.dql_aggregate_function.tag' ]
+
+  Wata\DwhQueryDoctrineBundle\Dql\SumAggregateFunction:
+    tags: [ 'dwh_query_doctrine.dql_aggregate_function.tag' ]
+
+  Wata\DwhQueryDoctrineBundle\Dql\AvgAggregateFunction:
+    tags: [ 'dwh_query_doctrine.dql_aggregate_function.tag' ]
+  # <--
+
+  dwh_query_doctrine.entity_type_registry:
+    class: Wata\DwhQueryDoctrineBundle\Factory\EntityTypeRegistry
+    arguments:
+      - '@doctrine'
+      - '%dwh_query_doctrine.doctrine_entities%'
+      - '@Wata\DwhQueryBundle\Resolver\ResolverMapBuilder'
+
+  dwh_query_doctrine.schema_builder:
+    class: Wata\DwhQueryDoctrineBundle\Schema\DoctrineSchemaBuilder
+    arguments:
+      - '@dwh_query_doctrine.entity_type_registry'
+
+  dwh_query_doctrine.dql_functions_service:
+    class: Wata\DwhQueryDoctrineBundle\Utils\DqlFunctionsService
+    arguments:
+      - !tagged_iterator dwh_query_doctrine.dql_aggregate_function.tag
+
+  dwh_query_doctrine.operators_service:
+    class:  Wata\DwhQueryDoctrineBundle\Utils\OperatorsService
+    arguments:
+      - !tagged_iterator dwh_query_doctrine.operator_type.tag

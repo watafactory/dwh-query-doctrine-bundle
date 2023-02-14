@@ -1,0 +1,23 @@
+{
+  "name": "watafactory/dwh-query-doctrine-bundle",
+  "type": "symfony-bundle",
+  "description": "This bundle extends DWH Bundle registering the types according the Doctrine to build the Graphql Schema",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "WATA Factory",
+      "email": "development@wata.es"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.4",
+    "symfony/config": "^5.4",
+    "symfony/dependency-injection": "^5.4",
+    "symfony/http-kernel": "^5.4",
+    "doctrine/persistence": "^2.0",
+    "doctrine/orm": "^2.7",
+    "symfony/string": "^5.4",
+    "watafactory/dwh-query-bundle": "^1.0"
+  }
+}
